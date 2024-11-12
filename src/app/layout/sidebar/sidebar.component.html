@@ -1,0 +1,49 @@
+<aside class="w-64 h-screen bg-gray-800 text-white p-4 space-y-6 z-50">
+  <div class="flex flex-col items-center justify-center space-y-2">
+    <img
+      src="https://picsum.photos/200/300"
+      alt="Random Image"
+      class="rounded-full w-32 h-32"
+    />
+    <p class="text-xl font-semibold">Admin Name</p>
+  </div>
+  <div class="border"></div>
+
+  <div class="space-y-4">
+    <a
+      routerLink="/dashboard"
+      [ngClass]="{ 'active-link': isActive('/dashboard') }"
+      class="flex items-center space-x-2 p-2 rounded"
+    >
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    </a>
+
+    <a
+      routerLink="/users"
+      [ngClass]="{ 'active-link': isActive('/users') }"
+      class="flex items-center space-x-2 p-2 rounded"
+    >
+      <i class="fas fa-suitcase"></i>
+      <span>All Users</span>
+    </a>
+
+    <a
+      routerLink="/application"
+      [ngClass]="{ 'active-link': isActive('/application') }"
+      class="flex items-center space-x-2 p-2 rounded"
+    >
+      <i class="fas fa-chart-line"></i>
+      <span>Application</span>
+    </a>
+
+    <a
+      routerLink="/calendar"
+      [ngClass]="{ 'active-link': isActive('/calendar') }"
+      class="flex items-center space-x-2 p-2 rounded"
+    >
+      <i class="fas fa-cogs"></i>
+      <span>Calendar</span>
+    </a>
+  </div>
+</aside>
