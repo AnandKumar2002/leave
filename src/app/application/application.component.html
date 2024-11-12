@@ -1,1 +1,124 @@
-<p>application works!</p>
+<div class="p-4 md:p-8 bg-gray-100 min-h-screen">
+  <div class="flex justify-between items-center mb-4">
+    <p class="text-lg md:text-2xl font-semibold text-gray-800">
+      Leave Applications
+    </p>
+    <div>
+      <select
+        [(ngModel)]="leaveStatusFilter"
+        (change)="filterByStatus(leaveStatusFilter)"
+        class="border p-2 rounded"
+      >
+        <option value="">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto bg-white shadow-lg rounded-lg max-w-full">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-200">
+        <tr class="">
+          <th class="px-4 py-2">SR NO.</th>
+          <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">Leave Type</th>
+          <th class="px-4 py-2">From</th>
+          <th class="px-4 py-2">To</th>
+          <th class="px-4 py-2">Days</th>
+          <th class="px-4 py-2">Status</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let user of filteredUsers; let i = index"
+          [ngClass]="{ 'bg-blue-50': i % 2 != 0, 'hover:bg-gray-100': true }"
+        >
+          <td class="border px-4 py-2">{{ user.id }}</td>
+          <td class="border px-4 py-2">{{ user.name }}</td>
+          <td class="border px-4 py-2">
+            <div *ngFor="let app of user.leaveApplications">
+              {{ app.type }}
+            </div>
+          </td>
+          <td class="border px-4 py-2">
+            <div *ngFor="let app of user.leaveApplications">
+              {{ app.from }}
+            </div>
+          </td>
+          <td class="border px-4 py-2">
+            <div *ngFor="let app of user.leaveApplications">
+              {{ app.to }}
+            </div>
+          </td>
+          <td class="border px-4 py-2">
+            <div *ngFor="let app of user.leaveApplications">
+              {{ calculateDays(app.from, app.to) }}
+            </div>
+          </td>
+          <td class="border px-4 py-2">
+            <div *ngFor="let app of user.leaveApplications">
+              <span
+                [ngClass]="{
+                  'text-green-500': app.status === 'Approved',
+                  'text-yellow-500': app.status === 'Pending',
+                  'text-red-500': app.status === 'Rejected'
+                }"
+                >{{ app.status }}</span
+              >
+            </div>
+          </td>
+          <td class="border px-4 py-2">
+            <div *ngFor="let app of user.leaveApplications">
+              <button
+                *ngIf="app.status === 'Pending'"
+                (click)="openModal(app)"
+                class="text-blue-500 px-4 py-2 rounded"
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div
+      *ngIf="isModalOpen"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+    >
+      <div class="bg-white p-6 rounded shadow-lg max-w-md w-full">
+        <h2 class="text-xl font-bold mb-4">Manage Leave Application</h2>
+        <div>
+          <p class="mb-2">Name: {{ selectedApplication?.user?.name }}</p>
+          <p class="mb-2">Leave Type: {{ selectedApplication?.type }}</p>
+          <p class="mb-2">From: {{ selectedApplication?.from }}</p>
+          <p class="mb-2">To: {{ selectedApplication?.to }}</p>
+        </div>
+        <div class="mt-4">
+          <button
+            (click)="changeApplicationStatus('Approved')"
+            class="bg-green-500 text-white px-4 py-2 rounded mr-2"
+          >
+            Approve
+          </button>
+          <button
+            (click)="changeApplicationStatus('Rejected')"
+            class="bg-red-500 text-white px-4 py-2 rounded"
+          >
+            Reject
+          </button>
+          <button
+            (click)="closeModal()"
+            class="bg-gray-300 text-black px-4 py-2 rounded ml-2"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

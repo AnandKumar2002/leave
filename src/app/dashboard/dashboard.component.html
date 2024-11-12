@@ -1,20 +1,120 @@
-<div class="p-2">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-4 md:p-8 bg-gray-100 min-h-screen">
+  <!-- Header Section -->
+  <div class="flex justify-between items-center mb-4">
+    <p class="text-lg md:text-2xl font-semibold text-gray-800">Dashboard</p>
+    <p
+      class="text-sm text-gray-600 shadow-md rounded-lg bg-white p-2 flex items-center cursor-pointer"
+    >
+      <i class="fa-solid fa-calendar-days mr-2"></i> {{ currentDateTime }}
+    </p>
+  </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h3 class="text-xl font-semibold mb-4">Total Users</h3>
-        <p class="text-gray-600">11</p>
+  <!-- Stats Section -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Total Users -->
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg cursor-pointer"
+      (click)="redirectToUsers()"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Total Users</h3>
+        <i class="fa-solid fa-users text-2xl text-blue-500"></i>
       </div>
-  
-      <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h3 class="text-xl font-semibold mb-4">Total Leaves</h3>
-        <p class="text-gray-600">11</p>
+      <p class="text-gray-600 text-2xl font-bold">{{ totalUsers }}</p>
+    </div>
+
+    <!-- Total Leaves -->
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg cursor-pointer"
+      (click)="redirectToUsers()"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Total Leaves</h3>
+        <i class="fa-solid fa-calendar-day text-2xl text-orange-500"></i>
       </div>
-  
-      <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h3 class="text-xl font-semibold mb-4">Approved Leaves</h3>
-        <p class="text-gray-600">11</p>
+      <p class="text-gray-600 text-2xl font-bold">{{ totalLeaves }}</p>
+    </div>
+
+    <!-- Approved Leaves (Open Modal on Click) -->
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg cursor-pointer"
+      (click)="openModal('approvedLeaves')"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Approved Leaves</h3>
+        <i class="fa-solid fa-check-circle text-2xl text-green-500"></i>
+      </div>
+      <p class="text-gray-600 text-2xl font-bold">
+        {{ approvedLeaves.length }}
+      </p>
+    </div>
+
+    <!-- Public Holidays (Open Modal on Click) -->
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg cursor-pointer"
+      (click)="openModal('publicHolidays')"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Public Holidays</h3>
+        <i class="fa-solid fa-sun text-2xl text-yellow-500"></i>
+      </div>
+      <p class="text-gray-600 text-2xl font-bold">{{ publicHolidaysCount }}</p>
+    </div>
+  </div>
+
+  <!-- Modal for Detailed View -->
+  <div
+    *ngIf="isModalOpen"
+    class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50"
+  >
+    <div
+      class="bg-white rounded-lg p-4 sm:p-6 md:p-8 w-full max-w-lg mx-4 relative"
+    >
+      <!-- Close Button Positioned Inside the Modal -->
+      <button
+        class="absolute top-[-10px] right-[-10px] h-7 w-7 flex items-center justify-center bg-red-600 text-white hover:bg-red-500 rounded-full transition-colors duration-300"
+        (click)="closeModal()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex justify-center items-center mb-4">
+        <h3
+          class="text-xl font-semibold uppercase"
+          *ngIf="modalType === 'approvedLeaves'"
+        >
+          Approved Leaves Details
+        </h3>
+        <h3
+          class="text-xl font-semibold uppercase"
+          *ngIf="modalType === 'publicHolidays'"
+        >
+          Public Holidays Details
+        </h3>
+      </div>
+
+      <!-- Modal Content for Approved Leaves -->
+      <div *ngIf="modalType === 'approvedLeaves'">
+        <div *ngFor="let leave of approvedLeaves" class="mb-2">
+          <div class="text-lg flex justify-between items-center">
+            <p>
+              {{ leave.name }}
+            </p>
+
+            <p class="font-medium">{{ leave.from }} to {{ leave.to }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Content for Public Holidays -->
+      <div *ngIf="modalType === 'publicHolidays'">
+        <div *ngFor="let holiday of publicHolidays" class="mb-2">
+          <p class="text-lg">
+            {{ holiday.date }} -
+            <span class="font-medium">{{ holiday.name }}</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

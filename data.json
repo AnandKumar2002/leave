@@ -1,0 +1,216 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Alice Johnson",
+            "yearlyTotalLeaves": 24,
+            "CL": 6,
+            "ML": 6,
+            "EL": 12,
+            "leaveStatus": "On Leave",
+            "leaveApplications": [
+                {
+                    "type": "CL",
+                    "from": "2024-10-01",
+                    "to": "2024-10-02",
+                    "status": "Approved"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Bob Smith",
+            "yearlyTotalLeaves": 24,
+            "CL": 4,
+            "ML": 8,
+            "EL": 12,
+            "leaveStatus": "Pending",
+            "leaveApplications": [
+                {
+                    "type": "EL",
+                    "from": "2024-11-01",
+                    "to": "2024-11-10",
+                    "status": "Pending"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Catherine Lee",
+            "yearlyTotalLeaves": 20,
+            "CL": 5,
+            "ML": 5,
+            "EL": 10,
+            "leaveStatus": "On Leave",
+            "leaveApplications": [
+                {
+                    "type": "ML",
+                    "from": "2024-10-15",
+                    "to": "2024-10-16",
+                    "status": "Approved"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "David Brown",
+            "yearlyTotalLeaves": 30,
+            "CL": 10,
+            "ML": 10,
+            "EL": 10,
+            "leaveStatus": "Rejected",
+            "leaveApplications": [
+                {
+                    "type": "CL",
+                    "from": "2024-09-05",
+                    "to": "2024-09-06",
+                    "status": "Rejected"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Eva Green",
+            "yearlyTotalLeaves": 18,
+            "CL": 6,
+            "ML": 6,
+            "EL": 6,
+            "leaveStatus": "Pending",
+            "leaveApplications": [
+                {
+                    "type": "EL",
+                    "from": "2024-12-01",
+                    "to": "2024-12-05",
+                    "status": "Pending"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Frank White",
+            "yearlyTotalLeaves": 22,
+            "CL": 5,
+            "ML": 7,
+            "EL": 10,
+            "leaveStatus": "On Leave",
+            "leaveApplications": [
+                {
+                    "type": "ML",
+                    "from": "2024-08-10",
+                    "to": "2024-08-12",
+                    "status": "Approved"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "Grace Black",
+            "yearlyTotalLeaves": 26,
+            "CL": 6,
+            "ML": 8,
+            "EL": 12,
+            "leaveStatus": "Pending",
+            "leaveApplications": [
+                {
+                    "type": "CL",
+                    "from": "2024-07-14",
+                    "to": "2024-07-15",
+                    "status": "Pending"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "name": "Henry Ford",
+            "yearlyTotalLeaves": 25,
+            "CL": 5,
+            "ML": 8,
+            "EL": 12,
+            "leaveStatus": "Pending",
+            "leaveApplications": [
+                {
+                    "type": "EL",
+                    "from": "2024-11-20",
+                    "to": "2024-11-25",
+                    "status": "Pending"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "name": "Ivy Brooks",
+            "yearlyTotalLeaves": 20,
+            "CL": 4,
+            "ML": 6,
+            "EL": 10,
+            "leaveStatus": "Rejected",
+            "leaveApplications": [
+                {
+                    "type": "CL",
+                    "from": "2024-10-21",
+                    "to": "2024-10-22",
+                    "status": "Rejected"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "name": "Jack Turner",
+            "yearlyTotalLeaves": 28,
+            "CL": 8,
+            "ML": 8,
+            "EL": 12,
+            "leaveStatus": "Pending",
+            "leaveApplications": [
+                {
+                    "type": "ML",
+                    "from": "2024-12-15",
+                    "to": "2024-12-16",
+                    "status": "Pending"
+                }
+            ]
+        }
+    ],
+    "publicHolidays": [
+        {
+            "date": "2024-01-01",
+            "name": "New Year's Day"
+        },
+        {
+            "date": "2024-03-08",
+            "name": "International Women's Day"
+        },
+        {
+            "date": "2024-05-01",
+            "name": "Labor Day"
+        },
+        {
+            "date": "2024-08-15",
+            "name": "Independence Day"
+        },
+        {
+            "date": "2024-10-02",
+            "name": "Gandhi Jayanti"
+        },
+        {
+            "date": "2024-12-25",
+            "name": "Christmas"
+        },
+        {
+            "date": "2024-11-14",
+            "name": "Children's Day"
+        },
+        {
+            "date": "2024-07-04",
+            "name": "Founders' Day"
+        },
+        {
+            "date": "2024-11-01",
+            "name": "All Saints' Day"
+        },
+        {
+            "date": "2024-06-21",
+            "name": "International Yoga Day"
+        }
+    ]
+}
