@@ -19,9 +19,13 @@ interface User {
   id: number;
   name: string;
   yearlyTotalLeaves: number;
-  CL: number;
-  ML: number;
-  EL: number;
+  CL_Taken: number;
+  ML_Taken: number;
+  EL_Taken: number;
+
+  CL_Assign: number;
+  ML_Assign: number;
+  EL_Assign: number;
   leaveApplications: LeaveApplication[];
 }
 
@@ -85,9 +89,9 @@ export class AllUsersComponent {
 
   calculateYearlyTotal(): number {
     return (
-      (this.selectedUser?.CL || 0) +
-      (this.selectedUser?.ML || 0) +
-      (this.selectedUser?.EL || 0)
+      (this.selectedUser?.CL_Assign || 0) +
+      (this.selectedUser?.ML_Assign || 0) +
+      (this.selectedUser?.EL_Assign || 0)
     );
   }
 
@@ -130,9 +134,9 @@ export class AllUsersComponent {
       user.id,
       user.name,
       user.yearlyTotalLeaves,
-      user.CL,
-      user.ML,
-      user.EL,
+      user.CL_Assign,
+      user.ML_Assign,
+      user.EL_Assign,
     ]);
 
     doc.text('User List', 20, 10);
@@ -164,11 +168,14 @@ export class AllUsersComponent {
         : valueB.localeCompare(valueA);
     }
 
-    // Handle number comparison
     if (typeof valueA === 'number' && typeof valueB === 'number') {
       return this.sortAscending ? valueA - valueB : valueB - valueA;
     }
 
-    return 0; // If types are not comparable
+    return 0;
+  }
+
+  totalTakenLeave(user: User): number {
+    return (user.CL_Taken || 0) + (user.ML_Taken || 0) + (user.EL_Taken || 0);
   }
 }

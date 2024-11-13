@@ -17,7 +17,6 @@ export class ApplicationComponent {
   isModalOpen = false;
   selectedApplication: any = null;
 
-  // Filter users based on status (Pending, Approved, Rejected)
   filterByStatus(status: string) {
     if (status) {
       this.filteredUsers = this.users.filter((user) =>

@@ -8,13 +8,14 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
   currentDateTime: string = '';
   data = usersData;
   totalUsers: number = 0;
   totalLeaves: number = 0;
+  totalTakenLeaves: number = 0;
   approvedLeaves: any[] = [];
   publicHolidaysCount: number = 0;
   publicHolidays: any[] = [];
@@ -26,7 +27,6 @@ export class DashboardComponent {
   ngOnInit(): void {
     this.updateDateTime();
     this.calculateDashboardStats();
-    this.fetchApprovedLeaves();
     this.fetchPublicHolidays();
     setInterval(() => {
       this.updateDateTime();
@@ -47,36 +47,29 @@ export class DashboardComponent {
   }
 
   calculateDashboardStats(): void {
-    // Calculate total users
     this.totalUsers = this.data.users.length;
 
-    // Calculate total leaves (sum of yearly leaves)
-    this.totalLeaves = this.data.users.reduce((total, user) => total + user.yearlyTotalLeaves, 0);
+    this.totalLeaves = this.data.users.reduce(
+      (total, user) => total + user.yearlyTotalLeaves,
+      0
+    );
 
-    // Calculate approved leaves and store them for modal display
-    this.approvedLeaves = this.data.users
-      .flatMap((user) =>
-        user.leaveApplications.filter((app) => app.status === 'Approved').map((app) => ({
+    this.totalTakenLeaves = this.data.users.reduce(
+      (total, user) => total + user.CL_Taken + user.ML_Taken + user.EL_Taken,
+      0
+    );
+
+    this.approvedLeaves = this.data.users.flatMap((user) =>
+      user.leaveApplications
+        .filter((app) => app.status === 'Approved')
+        .map((app) => ({
           name: user.name,
           from: app.from,
           to: app.to,
         }))
-      );
-
-    // Count public holidays
-    this.publicHolidaysCount = this.data.publicHolidays.length;
-  }
-
-  fetchApprovedLeaves(): void {
-    this.approvedLeaves = this.data.users.flatMap(user =>
-      user.leaveApplications
-        .filter(app => app.status === 'Approved')
-        .map(app => ({
-          name: user.name,
-          from: app.from,
-          to: app.to
-        }))
     );
+
+    this.publicHolidaysCount = this.data.publicHolidays.length;
   }
 
   fetchPublicHolidays(): void {
@@ -84,7 +77,7 @@ export class DashboardComponent {
   }
 
   redirectToUsers(): void {
-    this.router.navigate(['/users']); // Navigate to /users route
+    this.router.navigate(['/users']);
   }
 
   openModal(type: string): void {
@@ -95,4 +88,17 @@ export class DashboardComponent {
   closeModal(): void {
     this.isModalOpen = false;
   }
+
+  redirectToApprovedLeaves(): void {
+    this.router.navigate(['/approved-leaves']);
+  }
+
+  calculateDays(startDate: string | Date, endDate: string | Date): number {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const timeDiff = end.getTime() - start.getTime();
+    const diffDays = timeDiff / (1000 * 3600 * 24);
+    return diffDays + 1;
+  }
+  
 }

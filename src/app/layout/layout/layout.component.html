@@ -1,8 +1,5 @@
-<div class="flex h-screen bg-gray-100">
-  <!-- @if(isSidebarVisible || isMobileSidebarVisible) {
-  <app-sidebar id="sidebar" class="transition-all duration-300"></app-sidebar>
-  } -->
-
+<div class="h-screen flex flex-col bg-gray-100">
+  <!-- Sidebar -->
   <app-sidebar
     id="sidebar"
     *ngIf="isSidebarVisible || isMobileSidebarVisible"
@@ -12,15 +9,7 @@
     }"
   ></app-sidebar>
 
-  <!-- <app-sidebar
-  id="sidebar"
-  *ngIf="isSidebarVisible || isMobileSidebarVisible"
-  [ngClass]="{
-    'hidden lg:block': !isMobileSidebarVisible,
-    'lg:hidden': isMobileSidebarVisible 
-  }"
-></app-sidebar> -->
-
+  <!-- Main Content -->
   <div class="flex-1 flex flex-col">
     <app-header
       (toggleSidebar)="toggleSidebar()"

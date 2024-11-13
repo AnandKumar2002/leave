@@ -2,6 +2,13 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+@media (max-width: 1024px) {
+  #sidebar {
+    position: absolute;
+    z-index: 9999;
+  }
+}
+
 #sidebar.hidden {
   transform: translateX(-100%);
   opacity: 0;
@@ -11,29 +18,3 @@
   transform: translateX(0);
   opacity: 1;
 }
-
-
-// Leave Management System
-// A system Where the user Applies for a Leave and then the admin Will Approve that
-// Leave.
-// ● Assign Yearly Leave total Amount Of Leaves Available to the employee.
-// ● Add a Credited Leave Field that can have a fixed amount of leaves he can apply
-// and not exceed no of days then credited leaves.
-// ● Assign the user 3 types of leaves CL, ML, EL, and initialize them with a number
-// of leaves by admin
-// ● Now users can apply for Leave according to the number of leaves he has like CL,
-// ML, EL
-// ● When Applying for Leave user should not have to apply for holidays like Sundays
-// and any other holidays available likewise (admin can also add a particular date
-// as a holiday)
-// ● He can also apply for multiple days' leave as well
-
-
-// Admin Role
-// ● Admin Can See All Users
-// ● Assign Yearly total Leaves to the user
-// ● Assign CL,ML,EL to the user
-// ● Add Public Holidays To the Calendar
-// ● Approve/Reject the Application
-// ● Calendar View To Show All Holidays And Those users Who Are On Leave
-// (Month View)

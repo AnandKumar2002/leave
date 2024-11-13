@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  isSidebarVisible = true;
+  isSidebarVisible = false;
   isMobileSidebarVisible = false;
 
   constructor() {}

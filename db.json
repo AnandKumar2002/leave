@@ -221,57 +221,56 @@
       ]
     }
   ],
-"publicHolidays": [
-  {
-    "startDate": "2024-01-01",
-    "endDate": "2024-01-01",
-    "name": "New Year's Day"
-  },
-  {
-    "startDate": "2024-03-08",
-    "endDate": "2024-03-08",
-    "name": "International Women's Day"
-  },
-  {
-    "startDate": "2024-05-01",
-    "endDate": "2024-05-01",
-    "name": "Labor Day"
-  },
-  {
-    "startDate": "2024-08-15",
-    "endDate": "2024-08-15",
-    "name": "Independence Day"
-  },
-  {
-    "startDate": "2024-10-02",
-    "endDate": "2024-10-02",
-    "name": "Gandhi Jayanti"
-  },
-  {
-    "startDate": "2024-12-25",
-    "endDate": "2024-12-25",
-    "name": "Christmas"
-  },
-  {
-    "startDate": "2024-11-14",
-    "endDate": "2024-11-14",
-    "name": "Children's Day"
-  },
-  {
-    "startDate": "2024-07-04",
-    "endDate": "2024-07-04",
-    "name": "Founders' Day"
-  },
-  {
-    "startDate": "2024-11-01",
-    "endDate": "2024-11-01",
-    "name": "All Saints' Day"
-  },
-  {
-    "startDate": "2024-06-21",
-    "endDate": "2024-06-21",
-    "name": "International Yoga Day"
-  }
-]
-
+  "publicHolidays": [
+    {
+      "startDate": "2024-01-01",
+      "endDate": "2024-01-01",
+      "name": "New Year's Day"
+    },
+    {
+      "startDate": "2024-03-08",
+      "endDate": "2024-03-08",
+      "name": "International Women's Day"
+    },
+    {
+      "startDate": "2024-05-01",
+      "endDate": "2024-05-01",
+      "name": "Labor Day"
+    },
+    {
+      "startDate": "2024-08-15",
+      "endDate": "2024-08-15",
+      "name": "Independence Day"
+    },
+    {
+      "startDate": "2024-10-02",
+      "endDate": "2024-10-02",
+      "name": "Gandhi Jayanti"
+    },
+    {
+      "startDate": "2024-12-25",
+      "endDate": "2024-12-25",
+      "name": "Christmas"
+    },
+    {
+      "startDate": "2024-11-14",
+      "endDate": "2024-11-14",
+      "name": "Children's Day"
+    },
+    {
+      "startDate": "2024-07-04",
+      "endDate": "2024-07-04",
+      "name": "Founders' Day"
+    },
+    {
+      "startDate": "2024-11-01",
+      "endDate": "2024-11-01",
+      "name": "All Saints' Day"
+    },
+    {
+      "startDate": "2024-06-21",
+      "endDate": "2024-06-21",
+      "name": "International Yoga Day"
+    }
+  ]
 }

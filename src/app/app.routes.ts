@@ -19,6 +19,13 @@ export const routes: Routes = [
       import('./calendar/calendar.component').then((m) => m.CalendarComponent),
   },
   {
+    path: 'approved-leaves',
+    loadComponent: () =>
+      import('./approved-leaves/approved-leaves.component').then(
+        (m) => m.ApprovedLeavesComponent
+      ),
+  },
+  {
     path: 'application',
     loadComponent: () =>
       import('./application/application.component').then(
