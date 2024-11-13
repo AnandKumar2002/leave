@@ -1,0 +1,25 @@
+.active-link {
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+}
+
+/* Navbar and Sidebar Styling */
+nav {
+  @apply fixed top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200;
+}
+
+aside {
+  @apply fixed top-0 left-0 z-40 w-64 h-full pt-20 transition-transform -translate-x-full bg-white dark:bg-gray-800 border-r peer-checked:translate-x-0 sm:translate-x-0;
+}
+
+main {
+  @apply p-8 pt-24 sm:ml-64;
+}
+
+/* Responsive behavior */
+@media (min-width: 640px) {
+  aside {
+    transform: translateX(0) !important;
+  }
+}

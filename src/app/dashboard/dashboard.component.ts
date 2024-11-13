@@ -100,5 +100,4 @@ export class DashboardComponent {
     const diffDays = timeDiff / (1000 * 3600 * 24);
     return diffDays + 1;
   }
-  
 }

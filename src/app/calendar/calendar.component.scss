@@ -1,8 +1,13 @@
 .fc .fc-toolbar-title {
-    font-size: 1em !important;
+  font-size: 1em !important;
 }
 
 .fc-day-sun {
-    background-color: rgba(66, 165, 245, 0.3);
-  }
-  
+  background-color: red !important;
+}
+
+.fc-day-sunday,
+.fc-day-2nd-saturday {
+  border: none !important;
+  background-color: transparent !important;
+}

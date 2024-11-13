@@ -17,6 +17,8 @@ export class CalendarComponent {
   calendarOptions: any;
   showHolidayForm = false;
   newHoliday = { name: '', start: '', end: '' };
+  currentDate: string;
+  errMessage: string | undefined;
 
   constructor(private http: HttpClient) {
     this.calendarOptions = {
@@ -24,10 +26,21 @@ export class CalendarComponent {
       plugins: [dayGridPlugin],
       events: [...this.getPublicHolidayEvents(), ...this.getUserLeaveEvents()],
     };
+
+    this.currentDate = this.getTodayDate();
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   toggleHolidayForm() {
     this.showHolidayForm = !this.showHolidayForm;
+    this.errMessage = '';
   }
 
   getPublicHolidayEvents() {
@@ -61,6 +74,15 @@ export class CalendarComponent {
     return leaveEvents;
   }
 
+  onStartDateChange(event: any) {
+    const startDate = event.target.value;
+    this.newHoliday.start = startDate;
+
+    if (this.newHoliday.end < startDate) {
+      this.newHoliday.end = '';
+    }
+  }
+
   addHoliday() {
     if (this.newHoliday.name && this.newHoliday.start && this.newHoliday.end) {
       const newHolidayEvent = {
@@ -77,8 +99,9 @@ export class CalendarComponent {
 
       this.newHoliday = { name: '', start: '', end: '' };
       this.showHolidayForm = false;
+      this.errMessage = '';
     } else {
-      alert('Please fill in all holiday details.');
+      this.errMessage = 'Please fill in all the fields.';
     }
   }
 }

@@ -1,116 +1,137 @@
-<div class="flex justify-between items-center mb-4">
-  <p class="text-lg md:text-2xl font-semibold text-gray-800">Approved Leaves</p>
-  <p
-    class="text-sm text-gray-600 shadow-md rounded-lg bg-white p-2 cursor-pointer"
-  >
-    <i class="fa-solid fa-calendar-days"></i> {{ currentDateTime }}
-  </p>
-</div>
-
-<!-- Search Bar and Date Filter -->
-<div class="flex flex-wrap gap-2 justify-between mb-4">
-  <!-- Search Bar -->
-  <div class="flex justify-between w-full sm:w-auto">
-    <input
-      [(ngModel)]="searchQuery"
-      type="text"
-      placeholder="Search by name..."
-      class="border border-gray-300 p-2 rounded-md w-full md:w-1/3 flex-1"
-    />
+<div class="p-4 md:p-8 bg-gray-100">
+  <div class="flex justify-between items-center mb-4">
+    <p class="text-lg md:text-2xl font-semibold text-gray-800">
+      Approved Leaves
+    </p>
+    <p
+      class="text-sm text-gray-600 shadow-md rounded-lg bg-white p-2 cursor-pointer"
+    >
+      <i class="fa-solid fa-calendar-days"></i> {{ currentDateTime }}
+    </p>
   </div>
 
-  <!-- Date Filter -->
-  <div class="flex gap-2 w-full sm:w-auto justify-between">
-    <!-- From Date -->
-    <input
-      [(ngModel)]="startDate"
-      type="date"
-      class="border border-gray-300 p-2 rounded-md w-full"
-      (change)="onFromDateChange()"
-    />
+  <!-- Search Bar and Date Filter -->
+  <div class="flex flex-wrap gap-2 justify-between mb-4">
+    <!-- Search Bar -->
+    <div class="flex justify-between w-full sm:w-auto">
+      <input
+        [(ngModel)]="searchQuery"
+        type="text"
+        placeholder="Search by name..."
+        class="border border-gray-300 p-2 rounded-md w-full md:w-1/3 flex-1"
+      />
+    </div>
 
-    <!-- To Date -->
-    <input
-      [(ngModel)]="endDate"
-      type="date"
-      class="border border-gray-300 p-2 rounded-md w-full"
-      [attr.min]="startDate"
-      [disabled]="!startDate"
-    />
+    <!-- Date Filter -->
+    <div class="flex gap-2 w-full sm:w-auto justify-between">
+      <!-- From Date -->
+      <input
+        [(ngModel)]="startDate"
+        type="date"
+        class="border border-gray-300 p-2 rounded-md w-full"
+        (change)="onFromDateChange()"
+      />
+
+      <!-- To Date -->
+      <input
+        [(ngModel)]="endDate"
+        type="date"
+        class="border border-gray-300 p-2 rounded-md w-full"
+        [attr.min]="startDate"
+        [disabled]="!startDate"
+      />
+    </div>
   </div>
-</div>
 
-<!-- Export Buttons -->
-<div class="flex justify-between gap-2 mb-4">
-  <button
-    (click)="exportToPDF()"
-    class="bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600"
-  >
-    Export to PDF
-  </button>
-  <button
-    (click)="exportToExcel()"
-    class="bg-green-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-green-600"
-  >
-    Export to Excel
-  </button>
-</div>
+  <!-- Export Buttons -->
+  <div class="flex justify-between gap-2 mb-4">
+    <button
+      (click)="exportToPDF()"
+      class="bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600"
+    >
+      Export to PDF
+    </button>
+    <button
+      (click)="exportToExcel()"
+      class="bg-green-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-green-600"
+    >
+      Export to Excel
+    </button>
+  </div>
 
-<!-- Table -->
-<div
-  class="overflow-x-auto bg-white shadow-lg rounded-lg max-w-full"
-  style="max-height: 550px"
->
-  <table id="approved-leaves-table" class="min-w-full divide-y divide-gray-200">
-    <thead class="bg-gray-200">
-      <tr>
-        <th class="py-2 px-4 text-left font-semibold text-gray-700 text-center">
-          SR NO.
-        </th>
-        <th class="py-2 px-4 text-left font-semibold text-gray-700 text-center">
-          Name
-        </th>
-        <th class="py-2 px-4 text-left font-semibold text-gray-700 text-center">
-          Leave Type
-        </th>
-        <th class="py-2 px-4 text-left font-semibold text-gray-700 text-center">
-          From
-        </th>
-        <th class="py-2 px-4 text-left font-semibold text-gray-700 text-center">
-          To
-        </th>
-        <th class="py-2 px-4 text-left font-semibold text-gray-700 text-center">
-          No. of Days
-        </th>
-        <th class="py-2 px-4 text-left font-semibold text-gray-700 text-center">
-          Approve
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let leave of filteredApprovedLeaves; let i = index"
-        [ngClass]="{ 'bg-blue-50': i % 2 !== 0, 'hover:bg-gray-100': true }"
-      >
-        <td class="py-2 px-4 border-b text-center">{{ i + 1 }}</td>
-        <td class="py-2 px-4 border-b text-center">{{ leave.name }}</td>
-        <td class="py-2 px-4 border-b text-center">{{ leave.leaveType }}</td>
-        <td class="py-2 px-4 border-b text-center">
-          {{ leave.from | date : "EEE, dd-MM-YYYY" }}
-        </td>
-        <td class="py-2 px-4 border-b text-center">
-          {{ leave.to | date : "EEE, dd-MM-YYYY" }}
-        </td>
-        <td class="py-2 px-4 border-b text-center">
-          {{ calculateLeaveDays(leave.from, leave.to) }}
-        </td>
-        <td class="py-2 px-4 border-b text-center text-green-500">DONE</td>
-      </tr>
-      <tr *ngIf="filteredApprovedLeaves.length === 0">
-        <td colspan="7" class="py-2 px-4 text-center text-gray-500">
-          No approved leaves found
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Table -->
+  <div
+    class="overflow-x-auto bg-white shadow-lg rounded-lg max-w-full"
+    style="max-height: 550px"
+  >
+    <table
+      id="approved-leaves-table"
+      class="min-w-full divide-y divide-gray-200"
+    >
+      <thead class="bg-gray-200">
+        <tr>
+          <th
+            class="py-2 px-4 text-left font-semibold text-gray-700 text-center"
+          >
+            SR NO.
+          </th>
+          <th
+            class="py-2 px-4 text-left font-semibold text-gray-700 text-center"
+          >
+            Name
+          </th>
+          <th
+            class="py-2 px-4 text-left font-semibold text-gray-700 text-center"
+          >
+            Leave Type
+          </th>
+          <th
+            class="py-2 px-4 text-left font-semibold text-gray-700 text-center"
+          >
+            From
+          </th>
+          <th
+            class="py-2 px-4 text-left font-semibold text-gray-700 text-center"
+          >
+            To
+          </th>
+          <th
+            class="py-2 px-4 text-left font-semibold text-gray-700 text-center"
+          >
+            No. of Days
+          </th>
+          <th
+            class="py-2 px-4 text-left font-semibold text-gray-700 text-center"
+          >
+            Approve
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let leave of filteredApprovedLeaves; let i = index"
+          [ngClass]="{ 'bg-blue-50': i % 2 !== 0, 'hover:bg-gray-100': true }"
+        >
+          <td class="py-2 px-4 border-b text-center">{{ i + 1 }}</td>
+          <td class="py-2 px-4 border-b text-center">{{ leave.name }}</td>
+          <td class="py-2 px-4 border-b text-center">{{ leave.leaveType }}</td>
+          <td class="py-2 px-4 border-b text-center">
+            {{ leave.from | date : "EEE, dd-MM-YYYY" }}
+          </td>
+          <td class="py-2 px-4 border-b text-center">
+            {{ leave.to | date : "EEE, dd-MM-YYYY" }}
+          </td>
+          <td class="py-2 px-4 border-b text-center">
+            {{ calculateLeaveDays(leave.from, leave.to) }}
+          </td>
+          <td class="py-2 px-4 border-b text-center text-green-500">DONE</td>
+        </tr>
+        <tr *ngIf="filteredApprovedLeaves.length === 0">
+          <td colspan="7" class="py-2 px-4 text-center text-gray-500">
+            No approved leaves found
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

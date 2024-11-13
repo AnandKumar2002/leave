@@ -1,4 +1,4 @@
-<div>
+<div class="p-4 md:p-8 bg-gray-100">
   <div class="flex justify-between items-center mb-4">
     <p class="text-lg md:text-2xl font-semibold text-gray-800">Calendar</p>
     <button
@@ -16,6 +16,8 @@
     <div class="bg-white p-6 rounded-lg w-96">
       <h2 class="text-xl font-semibold mb-4">Add New Holiday</h2>
 
+      <div *ngIf="errMessage" class="text-red-500 mb-4">{{ errMessage }}</div>
+
       <label for="holidayName">Holiday Name:</label>
       <input
         id="holidayName"
@@ -30,6 +32,8 @@
         id="holidayStart"
         type="date"
         [(ngModel)]="newHoliday.start"
+        (change)="onStartDateChange($event)"
+        [min]="currentDate"
         class="border rounded p-2 mb-2 w-full"
       />
 
@@ -38,6 +42,8 @@
         id="holidayEnd"
         type="date"
         [(ngModel)]="newHoliday.end"
+        [min]="newHoliday.start"
+        [disabled]="!newHoliday.start"
         class="border rounded p-2 mb-2 w-full"
       />
 

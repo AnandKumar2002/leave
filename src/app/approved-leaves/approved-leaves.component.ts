@@ -77,11 +77,57 @@ export class ApprovedLeavesComponent implements OnInit {
     );
   }
 
-  calculateLeaveDays(from: Date, to: Date): number {
-    const startDate = new Date(from);
-    const endDate = new Date(to);
-    const timeDifference = endDate.getTime() - startDate.getTime();
-    return Math.ceil(timeDifference / (1000 * 3600 * 24)) + 1;
+  // calculateLeaveDays(from: Date, to: Date): number {
+  //   const startDate = new Date(from);
+  //   const endDate = new Date(to);
+  //   const timeDifference = endDate.getTime() - startDate.getTime();
+  //   return Math.ceil(timeDifference / (1000 * 3600 * 24)) + 1;
+  // }
+
+  calculateLeaveDays(from: string, to: string) {
+    const holidays = usersData.publicHolidays;
+    const fromDate = new Date(from);
+    const toDate = new Date(to);
+
+    let currentDate = new Date(fromDate);
+    let daysDifference = 0;
+
+    while (currentDate <= toDate) {
+      const dayOfWeek = currentDate.getDay();
+      const isHoliday = this.isHoliday(currentDate, holidays);
+      const isSecondSaturday = this.isSecondSaturday(currentDate);
+
+      if (dayOfWeek !== 0 && !isHoliday && !isSecondSaturday) {
+        daysDifference++;
+      }
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return daysDifference;
+  }
+
+  isHoliday(
+    date: Date,
+    holidays: Array<{ startDate: string; endDate: string; name: string }>
+  ): boolean {
+    for (const holiday of holidays) {
+      const holidayStart = new Date(holiday.startDate);
+      const holidayEnd = new Date(holiday.endDate);
+
+      if (date >= holidayStart && date <= holidayEnd) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isSecondSaturday(date: Date): boolean {
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const firstSaturday = ((6 - firstDayOfMonth.getDay() + 7) % 7) + 1;
+    const secondSaturday = firstSaturday + 7;
+
+    return date.getDate() === secondSaturday;
   }
 
   onFromDateChange(): void {
