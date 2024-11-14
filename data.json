@@ -3,6 +3,19 @@
     {
       "id": 1,
       "name": "Alice Johnson",
+      "personalDetails": {
+        "employeeId": "E12345",
+        "phoneNumber": "+1 (555) 123-4567",
+        "email": "johnson@example.com",
+        "department": "Human Resources",
+        "position": "HR Manager",
+        "dob": "1985-06-15",
+        "address": "1234 Elm St",
+        "emergencyContact": "+1 (555) 987-6543",
+        "joinDate": "2015-08-01",
+        "leaveStatus": "On Leave",
+        "leaveRequestedDate": "2024-09-29"
+      },
       "yearlyTotalLeaves": 24,
       "CL_Assign": 6,
       "ML_Assign": 6,
@@ -10,6 +23,9 @@
       "CL_Taken": 3,
       "ML_Taken": 3,
       "EL_Taken": 6,
+      "CL_Rejected": 1,
+      "ML_Rejected": 1,
+      "EL_Rejected": 2,
       "leaveStatus": "On Leave",
       "leaveRequestedDate": "2024-09-29",
       "leaveApplications": [
@@ -19,6 +35,136 @@
           "from": "2024-10-01",
           "to": "2024-10-02",
           "status": "Approved"
+        }
+      ],
+      "leaveHistory": [
+        {
+          "username": "Alice Johnson",
+          "type": "CL",
+          "from": "2024-01-10",
+          "to": "2024-01-12",
+          "status": "Approved",
+          "reason": "Family event"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "CL",
+          "from": "2024-03-05",
+          "to": "2024-03-05",
+          "status": "Approved",
+          "reason": "Personal errands"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "CL",
+          "from": "2024-07-18",
+          "to": "2024-07-18",
+          "status": "Approved",
+          "reason": "School event"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "CL",
+          "from": "2024-09-02",
+          "to": "2024-09-03",
+          "status": "Rejected",
+          "reason": "Insufficient CL balance"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "ML",
+          "from": "2024-04-15",
+          "to": "2024-04-16",
+          "status": "Approved",
+          "reason": "Medical check-up"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "ML",
+          "from": "2024-06-10",
+          "to": "2024-06-12",
+          "status": "Approved",
+          "reason": "Illness"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "ML",
+          "from": "2024-08-05",
+          "to": "2024-08-07",
+          "status": "Approved",
+          "reason": "Medical procedure"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "ML",
+          "from": "2024-09-15",
+          "to": "2024-09-17",
+          "status": "Rejected",
+          "reason": "Previous leave overlap"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-02-10",
+          "to": "2024-02-14",
+          "status": "Approved",
+          "reason": "Vacation"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-05-20",
+          "to": "2024-05-22",
+          "status": "Approved",
+          "reason": "Family trip"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-07-25",
+          "to": "2024-07-28",
+          "status": "Approved",
+          "reason": "Holiday"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-08-15",
+          "to": "2024-08-17",
+          "status": "Approved",
+          "reason": "Festival celebration"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-10-01",
+          "to": "2024-10-04",
+          "status": "Approved",
+          "reason": "Personal retreat"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-11-01",
+          "to": "2024-11-03",
+          "status": "Approved",
+          "reason": "Annual getaway"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-10-15",
+          "to": "2024-10-18",
+          "status": "Rejected",
+          "reason": "Insufficient EL balance"
+        },
+        {
+          "username": "Alice Johnson",
+          "type": "EL",
+          "from": "2024-11-20",
+          "to": "2024-11-23",
+          "status": "Rejected",
+          "reason": "Leave limit reached"
         }
       ]
     },

@@ -1,0 +1,230 @@
+<div class="p-4 md:p-8 bg-gray-100">
+  <div class="">
+    <div class="flex justify-between items-center mb-4">
+      <p class="text-lg md:text-2xl font-semibold text-gray-800">
+        {{ user?.name }}
+      </p>
+      <p
+        class="text-sm text-gray-600 shadow-md rounded-lg bg-white p-2 cursor-pointer"
+      >
+        <i class="fa-solid fa-calendar-days"></i> {{ currentDateTime }}
+      </p>
+    </div>
+    <div class="my-4 flex sm:justify-end justify-between">
+      <button
+        (click)="exportToExcel()"
+        class="px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Export to Excel
+      </button>
+      <button
+        (click)="exportToPDF()"
+        class="ml-2 px-4 py-2 bg-green-500 text-white rounded"
+      >
+        Export to PDF
+      </button>
+    </div>
+  </div>
+  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <table id="data-table" class="min-w-full table-auto border-collapse">
+      <!-- Personal Information Header -->
+      <thead>
+        <tr>
+          <th
+            colspan="2"
+            class="px-4 py-2 text-center font-semibold bg-gray-200"
+          >
+            Personal Information
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Personal Information Rows -->
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">
+            <strong>Employee ID</strong>
+          </td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.employeeId }}
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">
+            <strong>Phone Number</strong>
+          </td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.phoneNumber }}
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">
+            <strong>Email Address</strong>
+          </td>
+          <td class="px-3 py-2 border-b text-sm">
+            <a
+              href="mailto:{{ user?.personalDetails?.email }}"
+              class="text-blue-500 text-sm"
+            >
+              {{ user?.personalDetails?.email }}
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">
+            <strong>Department</strong>
+          </td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.department }}
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm"><strong>Position</strong></td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.position }}
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">
+            <strong>Date of Birth</strong>
+          </td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.dob | date }}
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm"><strong>Address</strong></td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.address }}
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">
+            <strong>Emergency Contact</strong>
+          </td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.emergencyContact }}
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm"><strong>Join Date</strong></td>
+          <td class="px-3 py-2 border-b text-sm">
+            {{ user?.personalDetails?.joinDate | date }}
+          </td>
+        </tr>
+      </tbody>
+
+      <!-- Leave Information Section -->
+      <thead>
+        <tr>
+          <th
+            colspan="2"
+            class="px-4 py-2 text-center font-semibold bg-gray-200"
+          >
+            Leave Information
+          </th>
+        </tr>
+        <tr>
+          <th class="px-3 py-2 text-left border-b font-semibold text-sm">
+            Leave Type
+          </th>
+          <th class="px-3 py-2 text-left border-b font-semibold text-sm">
+            Leave Status (Approved | Rejected)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Leave Information Rows -->
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">ML (Medical Leave)</td>
+          <td class="px-3 py-2 border-b text-sm">
+            <span
+              [ngClass]="{
+                'text-green-500': leaveCounts.ML.approved > 0,
+                'text-black': leaveCounts.ML.approved === 0
+              }"
+            >
+              Approved: {{ leaveCounts.ML.approved }}
+            </span>
+            |
+            <span
+              [ngClass]="{
+                'text-red-500': leaveCounts.ML.rejected > 0,
+                'text-black': leaveCounts.ML.rejected === 0
+              }"
+            >
+              Rejected: {{ leaveCounts.ML.rejected }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">CL (Casual Leave)</td>
+          <td class="px-3 py-2 border-b text-sm">
+            <span
+              [ngClass]="{
+                'text-green-500': leaveCounts.CL.approved > 0,
+                'text-black': leaveCounts.CL.approved === 0
+              }"
+            >
+              Approved: {{ leaveCounts.CL.approved }}
+            </span>
+            |
+            <span
+              [ngClass]="{
+                'text-red-500': leaveCounts.CL.rejected > 0,
+                'text-black': leaveCounts.CL.rejected === 0
+              }"
+            >
+              Rejected: {{ leaveCounts.CL.rejected }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-3 py-2 border-b text-sm">EL (Emergency Leave)</td>
+          <td class="px-3 py-2 border-b text-sm">
+            <span
+              [ngClass]="{
+                'text-green-500': leaveCounts.EL.approved > 0,
+                'text-black': leaveCounts.EL.approved === 0
+              }"
+            >
+              Approved: {{ leaveCounts.EL.approved }}
+            </span>
+            |
+            <span
+              [ngClass]="{
+                'text-red-500': leaveCounts.EL.rejected > 0,
+                'text-black': leaveCounts.EL.rejected === 0
+              }"
+            >
+              Rejected: {{ leaveCounts.EL.rejected }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-6">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+  <!-- Holiday Details Modal -->
+  <div
+    *ngIf="showHolidayDetails"
+    class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+  >
+    <div class="bg-white p-6 rounded-lg w-96 relative">
+      <h2 class="text-xl font-semibold mb-4 text-center">
+        Holiday/Leaves Details
+      </h2>
+      <div *ngIf="selectedHoliday">
+        <p><strong>Name:</strong> {{ selectedHoliday.title }}</p>
+      </div>
+      <button
+        class="absolute top-[-10px] right-[-10px] h-7 w-7 flex items-center justify-center bg-red-600 text-white hover:bg-red-500 rounded-full transition-colors duration-300"
+        (click)="closeHolidayDetails()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+</div>

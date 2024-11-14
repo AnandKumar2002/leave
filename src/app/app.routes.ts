@@ -40,6 +40,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'user-info/:id',
+    loadComponent: () =>
+      import('./user-info/user-info.component').then(
+        (m) => m.UserInfoComponent
+      ),
+  },
+  {
     path: 'test',
     loadComponent: () =>
       import('./test/test.component').then((m) => m.TestComponent),

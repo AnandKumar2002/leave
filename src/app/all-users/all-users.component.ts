@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import usersData from './../../../data.json';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 interface LeaveApplication {
   type: string;
@@ -38,6 +38,7 @@ interface User {
   styleUrls: ['./all-users.component.scss'],
 })
 export class AllUsersComponent {
+  router = inject(Router);
   users: User[] = usersData.users;
   searchQuery = '';
   selectedUser: User | null = null;
@@ -178,5 +179,10 @@ export class AllUsersComponent {
 
   totalTakenLeave(user: User): number {
     return (user.CL_Taken || 0) + (user.ML_Taken || 0) + (user.EL_Taken || 0);
+  }
+
+  goToUserInfo(user: User) {
+    this.router.navigate(['/user-info', user.id]);
+    console.log(user);
   }
 }

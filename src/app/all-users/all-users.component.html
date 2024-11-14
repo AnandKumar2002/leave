@@ -27,13 +27,13 @@
       (click)="exportToExcel()"
       class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors duration-300"
     >
-      Export to Excel
+    <i class="fa-solid fa-file-excel"></i> Excel
     </button>
     <button
       (click)="exportToPDF()"
       class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300"
     >
-      Export to PDF
+    <i class="fa-solid fa-file-pdf"></i> PDF
     </button>
   </div>
 
@@ -142,18 +142,23 @@
           [ngClass]="{ 'bg-blue-50': i % 2 != 0, 'hover:bg-gray-100': true }"
         >
           <td class="px-6 py-4 text-center">{{ user.id }}</td>
-          <td class="px-6 py-4 text-center">{{ user.name }}</td>
-          <td class="px-6 py-4 text-center">
-            {{ user.yearlyTotalLeaves }}/{{ totalTakenLeave(user) }}
+          <td
+            class="px-6 py-4 text-center text-blue-500 cursor-pointer"
+            (click)="goToUserInfo(user)"
+          >
+            {{ user.name }}
           </td>
           <td class="px-6 py-4 text-center">
-            {{ user.CL_Assign }}/{{ user.CL_Taken }}
+            {{ totalTakenLeave(user) }}/{{ user.yearlyTotalLeaves }}
           </td>
           <td class="px-6 py-4 text-center">
-            {{ user.ML_Assign }}/{{ user.ML_Taken }}
+            {{ user.CL_Taken }}/{{ user.CL_Assign }}
           </td>
           <td class="px-6 py-4 text-center">
-            {{ user.EL_Assign }}/{{ user.EL_Taken }}
+            {{ user.ML_Taken }}/{{ user.ML_Assign }}
+          </td>
+          <td class="px-6 py-4 text-center">
+            {{ user.EL_Taken }}/{{ user.EL_Assign }}
           </td>
           <td class="px-6 py-4 text-center flex justify-center space-x-3">
             <button (click)="openEditModal(user)" class="text-blue-500">
