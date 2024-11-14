@@ -65,4 +65,29 @@
   </div>
 
   <full-calendar [options]="calendarOptions"></full-calendar>
+
+  <!-- Holiday Details popup ok -->
+  <div
+    *ngIf="showHolidayDetails"
+    class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+  >
+    <div class="image bg-white p-6 rounded-lg w-96 relative">
+      <h2 class="text-xl font-semibold mb-4 text-center">
+        Holiday/Leaves Details
+      </h2>
+
+      <div *ngIf="selectedHoliday">
+        <p><strong>Name:</strong> {{ selectedHoliday.title }}</p>
+        <!-- <p><strong>Start Date:</strong> {{ selectedHoliday.start | date }}</p>
+        <p><strong>End Date:</strong> {{ selectedHoliday.end | date }}</p> -->
+      </div>
+
+      <button
+        class="absolute top-[-10px] right-[-10px] h-7 w-7 flex items-center justify-center bg-red-600 text-white hover:bg-red-500 rounded-full transition-colors duration-300"
+        (click)="closeHolidayDetails()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
 </div>

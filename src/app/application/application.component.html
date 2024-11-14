@@ -26,6 +26,7 @@
         <tr class="">
           <th class="px-4 py-2">SR NO.</th>
           <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">Leave Request</th>
           <th class="px-4 py-2">Leave Type</th>
           <th class="px-4 py-2">From</th>
           <th class="px-4 py-2">To</th>
@@ -39,29 +40,32 @@
           *ngFor="let user of filteredUsers; let i = index"
           [ngClass]="{ 'bg-blue-50': i % 2 != 0, 'hover:bg-gray-100': true }"
         >
-          <td class="border px-4 py-2">{{ user.id }}</td>
-          <td class="border px-4 py-2">{{ user.name }}</td>
-          <td class="border px-4 py-2">
+          <td class="border px-4 py-2 text-center">{{ i + 1 }}</td>
+          <td class="border px-4 py-2 text-center">{{ user.name }}</td>
+          <td class="border px-4 py-2 text-center">
+            {{ user.leaveRequestedDate | date : "dd-MM-yyyy" }}
+          </td>
+          <td class="border px-4 py-2 text-center">
             <div *ngFor="let app of user.leaveApplications">
               {{ app.type }}
             </div>
           </td>
-          <td class="border px-4 py-2">
+          <td class="border px-4 py-2 text-center">
             <div *ngFor="let app of user.leaveApplications">
               {{ app.from | date : "EEE, dd MMM, y" }}
             </div>
           </td>
-          <td class="border px-4 py-2">
+          <td class="border px-4 py-2 text-center">
             <div *ngFor="let app of user.leaveApplications">
               {{ app.to | date : "EEE, dd MMM, y" }}
             </div>
           </td>
-          <td class="border px-4 py-2">
+          <td class="border px-4 py-2 text-center">
             <div *ngFor="let app of user.leaveApplications">
               {{ calculateDays(app.from, app.to) }}
             </div>
           </td>
-          <td class="border px-4 py-2">
+          <td class="border px-4 py-2 text-center">
             <div *ngFor="let app of user.leaveApplications">
               <span
                 [ngClass]="{
@@ -73,12 +77,12 @@
               >
             </div>
           </td>
-          <td class="border px-4 py-2">
+          <td class="border px-4 py-2 text-center">
             <div *ngFor="let app of user.leaveApplications">
               <button
                 *ngIf="app.status === 'Pending'"
                 (click)="openModal(app)"
-                class="text-blue-500 px-4 py-2 rounded"
+                class="text-blue-500 px-4 py-2 text-center rounded"
               >
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>

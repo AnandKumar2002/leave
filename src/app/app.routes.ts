@@ -39,4 +39,9 @@ export const routes: Routes = [
         (m) => m.AllUsersComponent
       ),
   },
+  {
+    path: 'test',
+    loadComponent: () =>
+      import('./test/test.component').then((m) => m.TestComponent),
+  },
 ];

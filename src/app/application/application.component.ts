@@ -39,36 +39,32 @@ export class ApplicationComponent {
           user.leaveApplications.some((app) => app.status === status)
         )
         .map((user) => {
-          // Sort leave applications for each user
           user.leaveApplications.sort((a, b) => {
             const fromDateA = new Date(a.from);
             const fromDateB = new Date(b.from);
-            return fromDateB.getTime() - fromDateA.getTime(); // Latest leave first
+            return fromDateB.getTime() - fromDateA.getTime();
           });
           return user;
         })
         .sort((a, b) => {
-          // Sort users by leaveRequestedDate
           const dateA = new Date(a.leaveRequestedDate);
           const dateB = new Date(b.leaveRequestedDate);
-          return dateB.getTime() - dateA.getTime(); // Latest request first
+          return dateB.getTime() - dateA.getTime();
         });
     } else {
       this.filteredUsers = [...this.users]
         .map((user) => {
-          // Sort leave applications for each user
           user.leaveApplications.sort((a, b) => {
             const fromDateA = new Date(a.from);
             const fromDateB = new Date(b.from);
-            return fromDateB.getTime() - fromDateA.getTime(); // Latest leave first
+            return fromDateB.getTime() - fromDateA.getTime();
           });
           return user;
         })
         .sort((a, b) => {
-          // Sort users by leaveRequestedDate
           const dateA = new Date(a.leaveRequestedDate);
           const dateB = new Date(b.leaveRequestedDate);
-          return dateB.getTime() - dateA.getTime(); // Latest request first
+          return dateB.getTime() - dateA.getTime();
         });
     }
   }

@@ -1,6 +1,6 @@
 <div class="flex flex-col min-h-screen">
   <!-- Navbar -->
-  <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800">
+  <nav class="fixed top-0 z-50 w-full bg-gray-800 text-white border-b border-gray-200">
     <div class="flex items-center justify-between p-4">
       <label
         for="sidebar-toggle"
@@ -29,14 +29,14 @@
     (change)="toggleSidebar()"
   />
   <aside
-    class="fixed top-0 left-0 z-40 w-64 h-full pt-20 transition-transform -translate-x-full bg-white border-r dark:bg-gray-800 peer-checked:translate-x-0 sm:translate-x-0"
+    class="fixed top-0 left-0 z-40 w-64 h-full pt-20 transition-transform -translate-x-full bg-gray-800 text-white border-r  peer-checked:translate-x-0 sm:translate-x-0"
   >
     <ul class="p-4 space-y-2">
       <li>
         <a
           routerLink="/dashboard"
           [ngClass]="{ 'active-link': isActive('/dashboard') }"
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white hover:text-black dark:text-white"
+          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white hover:text-black text-white"
         >
           <i class="fas fa-tachometer-alt"></i>
           <span class="ml-3">Dashboard</span>
@@ -46,7 +46,7 @@
         <a
           routerLink="/users"
           [ngClass]="{ 'active-link': isActive('/users') }"
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white dark:text-white"
+          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white text-white"
         >
           <i class="fas fa-users"></i>
           <span class="ml-3">All Users</span>
@@ -56,7 +56,7 @@
         <a
           routerLink="/application"
           [ngClass]="{ 'active-link': isActive('/application') }"
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white dark:text-white"
+          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white text-white"
         >
           <i class="fas fa-file-alt"></i>
           <span class="ml-3">All Applications</span>
@@ -66,7 +66,7 @@
         <a
           routerLink="/calendar"
           [ngClass]="{ 'active-link': isActive('/calendar') }"
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white dark:text-white"
+          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-500 hover:text-white text-white"
         >
           <i class="fas fa-calendar-alt"></i>
           <span class="ml-3">Calendar</span>
@@ -83,7 +83,7 @@
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-4 mt-auto">
     <div class="container mx-auto text-center">
-      <p>&copy; 2024 Leave Management System. All Rights Reserved.</p>
+      <p>&copy; 2024 Leave Management System. By Anand Kumar.</p>
     </div>
   </footer>
 </div>

@@ -16,6 +16,7 @@ export class DashboardComponent {
   totalUsers: number = 0;
   totalLeaves: number = 0;
   totalTakenLeaves: number = 0;
+  totalApprovedLeaveDays: number = 0;
   approvedLeaves: any[] = [];
   publicHolidaysCount: number = 0;
   publicHolidays: any[] = [];
@@ -59,6 +60,16 @@ export class DashboardComponent {
       0
     );
 
+    // Calculating total approved leave days excluding weekends and public holidays
+    this.totalApprovedLeaveDays = this.data.users.reduce((total, user) => {
+      const approvedLeaveDays = user.leaveApplications
+        .filter((app) => app.status === 'Approved')
+        .reduce((leaveTotal, app) => {
+          return leaveTotal + this.calculateApprovedLeaveDays(app.from, app.to);
+        }, 0);
+      return total + approvedLeaveDays;
+    }, 0);
+
     this.approvedLeaves = this.data.users.flatMap((user) =>
       user.leaveApplications
         .filter((app) => app.status === 'Approved')
@@ -91,6 +102,60 @@ export class DashboardComponent {
 
   redirectToApprovedLeaves(): void {
     this.router.navigate(['/approved-leaves']);
+  }
+
+  // Function to calculate the approved leave days excluding weekends, public holidays, and second Saturdays
+  calculateApprovedLeaveDays(from: string | Date, to: string | Date): number {
+    const holidays = this.data.publicHolidays;
+    const fromDate = new Date(from);
+    const toDate = new Date(to);
+
+    let currentDate = new Date(fromDate);
+    let daysDifference = 0;
+
+    while (currentDate <= toDate) {
+      const dayOfWeek = currentDate.getDay();
+      console.log(dayOfWeek);
+      
+      const isHoliday = this.isHoliday(currentDate, holidays);
+      console.log(isHoliday);
+      
+      const isSecondSaturday = this.isSecondSaturday(currentDate);
+
+      // Exclude Sundays (0), public holidays, and second Saturdays
+      if (dayOfWeek !== 0 && !isHoliday && !isSecondSaturday) {
+        daysDifference++;
+      }
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return daysDifference;
+  }
+
+  // Function to check if the current date is a public holiday
+  isHoliday(
+    date: Date,
+    holidays: Array<{ startDate: string; endDate: string; name: string }>
+  ): boolean {
+    for (const holiday of holidays) {
+      const holidayStart = new Date(holiday.startDate);
+      const holidayEnd = new Date(holiday.endDate);
+
+      if (date >= holidayStart && date <= holidayEnd) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Function to check if the current date is the second Saturday of the month
+  isSecondSaturday(date: Date): boolean {
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const firstSaturday = ((6 - firstDayOfMonth.getDay() + 7) % 7) + 1;
+    const secondSaturday = firstSaturday + 7;
+
+    return date.getDate() === secondSaturday;
   }
 
   calculateDays(startDate: string | Date, endDate: string | Date): number {
