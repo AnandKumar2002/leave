@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { RouterLink } from '@angular/router';
 
 interface LeaveApplication {
   type: string;
@@ -32,7 +33,7 @@ interface User {
 @Component({
   selector: 'app-all-users',
   standalone: true,
-  imports: [FormsModule, CommonModule, FontAwesomeModule],
+  imports: [FormsModule, CommonModule, FontAwesomeModule, RouterLink],
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.scss'],
 })

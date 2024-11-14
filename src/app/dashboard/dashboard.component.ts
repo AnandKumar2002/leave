@@ -104,7 +104,7 @@ export class DashboardComponent {
     this.router.navigate(['/approved-leaves']);
   }
 
-  // Function to calculate the approved leave days excluding weekends, public holidays, and second Saturdays
+  // calculation ok
   calculateApprovedLeaveDays(from: string | Date, to: string | Date): number {
     const holidays = this.data.publicHolidays;
     const fromDate = new Date(from);
@@ -133,7 +133,6 @@ export class DashboardComponent {
     return daysDifference;
   }
 
-  // Function to check if the current date is a public holiday
   isHoliday(
     date: Date,
     holidays: Array<{ startDate: string; endDate: string; name: string }>
@@ -149,7 +148,6 @@ export class DashboardComponent {
     return false;
   }
 
-  // Function to check if the current date is the second Saturday of the month
   isSecondSaturday(date: Date): boolean {
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const firstSaturday = ((6 - firstDayOfMonth.getDay() + 7) % 7) + 1;

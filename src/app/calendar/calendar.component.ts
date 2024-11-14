@@ -31,11 +31,20 @@ export class CalendarComponent {
         ...this.getPublicHolidayEvents(),
         ...this.getFilteredUserLeaveEvents(),
       ],
-      eventDisplay: 'list-item',
+      eventDisplay: 'block',
+      // eventDisplay: 'list-item',
       eventClick: this.handleEventClick.bind(this),
+      height: '73vh',
+      // eventContent: this.renderEventContent,
     };
 
     this.currentDate = this.getTodayDate();
+  }
+
+  renderEventContent(arg: any) {
+    return {
+      html: `<div style="height: 10px; width: 10px; border-radius: 50%; background-color: ${arg.event.backgroundColor}; margin: 0 auto;"></div>`, // Show a colored dot
+    };
   }
 
   getTodayDate(): string {
@@ -50,6 +59,22 @@ export class CalendarComponent {
     this.showHolidayForm = !this.showHolidayForm;
     this.errMessage = '';
   }
+
+  // getPublicHolidayEvents() {
+  //   return usersData.publicHolidays.map((holiday) => {
+  //     const startDate = new Date(holiday.startDate);
+  //     const endDate = new Date(holiday.endDate);
+
+  //     endDate.setDate(endDate.getDate() + 1);
+
+  //     return {
+  //       title: holiday.name,
+  //       start: startDate.toISOString().split('T')[0],
+  //       end: endDate.toISOString().split('T')[0],
+  //       color: '#FFA726',
+  //     };
+  //   });
+  // }
 
   getPublicHolidayEvents() {
     return usersData.publicHolidays.map((holiday) => ({
@@ -135,16 +160,32 @@ export class CalendarComponent {
 
   addHoliday() {
     if (this.newHoliday.name && this.newHoliday.start && this.newHoliday.end) {
-      const newHolidayEvent = {
-        title: this.newHoliday.name,
-        start: this.newHoliday.start,
-        end: this.newHoliday.end,
-        color: '#FFA726',
-      };
+      const startDate = new Date(this.newHoliday.start);
+      const endDate = new Date(this.newHoliday.end);
+
+      if (endDate < startDate) {
+        this.errMessage = 'End date must be after the start date.';
+        return;
+      }
+
+      const newHolidayEvents = [];
+
+      for (
+        let currentDate = new Date(startDate);
+        currentDate <= endDate;
+        currentDate.setDate(currentDate.getDate() + 1)
+      ) {
+        newHolidayEvents.push({
+          title: this.newHoliday.name,
+          start: currentDate.toISOString().split('T')[0],
+          end: currentDate.toISOString().split('T')[0],
+          color: '#FFA726',
+        });
+      }
 
       this.calendarOptions.events = [
         ...this.calendarOptions.events,
-        newHolidayEvent,
+        ...newHolidayEvents,
       ];
 
       this.newHoliday = { name: '', start: '', end: '' };

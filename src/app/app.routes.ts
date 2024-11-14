@@ -44,4 +44,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./test/test.component').then((m) => m.TestComponent),
   },
+  {
+    path: 'add-new-user',
+    loadComponent: () =>
+      import('./add-new-user/add-new-user.component').then(
+        (m) => m.AddNewUserComponent
+      ),
+  },
 ];

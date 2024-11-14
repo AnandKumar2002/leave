@@ -1,0 +1,219 @@
+<div class="p-4 md:p-8 bg-gray-100">
+  <div class="flex justify-between items-center mb-4">
+    <p class="text-lg md:text-2xl font-semibold text-gray-800">Add New User</p>
+    <p
+      class="text-sm text-gray-600 shadow-md rounded-lg bg-white p-2 cursor-pointer"
+    >
+      <i class="fa-solid fa-calendar-days"></i> {{ currentDateTime }}
+    </p>
+  </div>
+
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <!-- Name Field -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+      <div class="space-y-2">
+        <label for="name" class="block text-sm font-medium text-gray-700"
+          >Name</label
+        >
+        <input
+          formControlName="name"
+          type="text"
+          id="name"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter name"
+        />
+        <div
+          *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched"
+          class="text-red-600 text-sm"
+        >
+          <p *ngIf="myForm.get('name')?.errors?.['required']">
+            Name is required.
+          </p>
+          <p *ngIf="myForm.get('name')?.errors?.['minLength']">
+            Name must be at least 3 characters long.
+          </p>
+        </div>
+      </div>
+
+      <!-- Yearly Total Leaves Field (readonly) -->
+      <div class="space-y-2">
+        <label
+          for="yearlyTotalLeaves"
+          class="block text-sm font-medium text-gray-700"
+          >Yearly Total Leaves</label
+        >
+        <input
+          formControlName="yearlyTotalLeaves"
+          type="number"
+          id="yearlyTotalLeaves"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Total leaves"
+          readonly
+        />
+      </div>
+    </div>
+
+    <!-- CL Taken, ML Taken, EL Taken Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="space-y-2">
+        <label for="CL_Taken" class="block text-sm font-medium text-gray-700"
+          >CL Taken</label
+        >
+        <input
+          formControlName="CL_Taken"
+          type="number"
+          id="CL_Taken"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter CL taken"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <label for="ML_Taken" class="block text-sm font-medium text-gray-700"
+          >ML Taken</label
+        >
+        <input
+          formControlName="ML_Taken"
+          type="number"
+          id="ML_Taken"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter ML taken"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <label for="EL_Taken" class="block text-sm font-medium text-gray-700"
+          >EL Taken</label
+        >
+        <input
+          formControlName="EL_Taken"
+          type="number"
+          id="EL_Taken"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter EL taken"
+        />
+      </div>
+    </div>
+
+    <!-- CL Assign, ML Assign, EL Assign Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="space-y-2">
+        <label for="CL_Assign" class="block text-sm font-medium text-gray-700"
+          >CL Assign</label
+        >
+        <input
+          formControlName="CL_Assign"
+          type="number"
+          id="CL_Assign"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter CL assign"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <label for="ML_Assign" class="block text-sm font-medium text-gray-700"
+          >ML Assign</label
+        >
+        <input
+          formControlName="ML_Assign"
+          type="number"
+          id="ML_Assign"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter ML assign"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <label for="EL_Assign" class="block text-sm font-medium text-gray-700"
+          >EL Assign</label
+        >
+        <input
+          formControlName="EL_Assign"
+          type="number"
+          id="EL_Assign"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter EL assign"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+      <div class="space-y-2">
+        <label for="leaveStatus" class="block text-sm font-medium text-gray-700"
+          >leaveStatus</label
+        >
+        <input
+          formControlName="leaveStatus"
+          type="text"
+          id="name"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="leaveStatus"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <label
+          for="leaveRequestedDate"
+          class="block text-sm font-medium text-gray-700"
+          >leaveRequestedDate</label
+        >
+        <input
+          formControlName="leaveRequestedDate"
+          type="date"
+          id="leaveRequestedDate"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="leaveRequestedDate"
+          readonly
+        />
+      </div>
+    </div>
+
+    <!-- Leave Applications Section -->
+    <!-- <div class="grid grid-cols-1 gap-6">
+      <div class="space-y-2">
+        <label for="leaveApplications" class="block text-sm font-medium text-gray-700">Leave Applications</label>
+        <div>
+          <div class="space-y-2">
+            <label for="leaveType" class="block text-sm font-medium text-gray-700">Leave Type</label>
+            <input
+              formControlName="leaveApplications.{{ 2 }}.type"
+              type="text"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter leave type"
+            />
+            <label for="leaveFrom" class="block text-sm font-medium text-gray-700">From Date</label>
+            <input
+              formControlName="leaveApplications.{{ 2 }}.from"
+              type="date"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <label for="leaveTo" class="block text-sm font-medium text-gray-700">To Date</label>
+            <input
+              formControlName="leaveApplications.{{ 2}}.to"
+              type="date"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <label for="leaveStatus" class="block text-sm font-medium text-gray-700">Leave Status</label>
+            <input
+              formControlName="leaveApplications.{{2 }}.status"
+              type="text"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter leave status"
+            />
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Submit Button -->
+    <div class="flex justify-center mt-4">
+      <button
+        type="submit"
+        [disabled]="myForm.invalid"
+        class="w-full sm:w-auto px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-300"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
