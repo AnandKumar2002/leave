@@ -151,7 +151,7 @@ export class UserInfoComponent {
 
     if (this.user && this.user.leaveHistory) {
       this.user.leaveHistory.forEach((leave: any) => {
-        if (leave.status !== 'Approved') return;
+        if (!['Approved', 'Rejected'].includes(leave.status)) return;
 
         const leaveStart = new Date(leave.from);
         const leaveEnd = new Date(leave.to);
@@ -161,20 +161,21 @@ export class UserInfoComponent {
           date <= leaveEnd;
           date.setDate(date.getDate() + 1)
         ) {
-          // Skip Sundays (getDay() === 0), second Saturdays, and public holidays
           if (
-            date.getDay() === 0 ||
-            this.isSecondSaturday(date) ||
-            this.isHoliday(date, holidays)
+            date.getDay() === 0 || // Sunday
+            this.isSecondSaturday(date) || // Second Saturday
+            this.isHoliday(date, holidays) // Public Holiday
           ) {
             continue;
           }
+
+          const color = leave.status === 'Approved' ? '#42A5F5' : '#FF7043';
 
           leaveEvents.push({
             title: `${this.user.name} (${leave.type} Leave)`,
             start: date.toISOString().split('T')[0],
             end: date.toISOString().split('T')[0],
-            color: '#42A5F5',
+            color: color,
           });
         }
       });
@@ -221,9 +222,9 @@ export class UserInfoComponent {
           this.user.id,
           this.user.name,
           personalDetails?.employeeId || 'N/A',
-          this.user.CL_Taken || 0,
-          this.user.ML_Taken || 0,
-          this.user.EL_Taken || 0,
+          `${this.user.CL_Taken || 0} / ${this.user.CL_Assign || 0}`,
+          `${this.user.ML_Taken || 0} / ${this.user.ML_Assign || 0}`,
+          `${this.user.EL_Taken || 0} / ${this.user.EL_Assign || 0}`,
           this.user.CL_Rejected || 0,
           this.user.ML_Rejected || 0,
           this.user.EL_Rejected || 0,

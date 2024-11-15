@@ -2,7 +2,7 @@
   <div class="">
     <div class="flex justify-between items-center mb-4">
       <p class="text-lg md:text-2xl font-semibold text-gray-800">
-        {{ user?.name }}
+        <i class="fa-solid fa-user text-blue-500 mx-2"></i> {{ user?.name }}
       </p>
       <p
         class="text-sm text-gray-600 shadow-md rounded-lg bg-white p-2 cursor-pointer"
@@ -32,7 +32,7 @@
         <tr>
           <th
             colspan="2"
-            class="px-4 py-2 text-center font-semibold bg-gray-200"
+            class="px-4 py-2 text-left text-2xl font-semibold bg-gray-200"
           >
             Personal Information
           </th>
@@ -118,7 +118,7 @@
         <tr>
           <th
             colspan="2"
-            class="px-4 py-2 text-center font-semibold bg-gray-200"
+            class="px-4 py-2 text-left text-2xl font-semibold bg-gray-200"
           >
             Leave Information
           </th>
@@ -137,21 +137,11 @@
         <tr>
           <td class="px-3 py-2 border-b text-sm">ML (Medical Leave)</td>
           <td class="px-3 py-2 border-b text-sm">
-            <span
-              [ngClass]="{
-                'text-green-500': leaveCounts.ML.approved > 0,
-                'text-black': leaveCounts.ML.approved === 0
-              }"
-            >
-              Approved: {{ leaveCounts.ML.approved }}
+            <span class="text-green-500">
+              Approved: {{ leaveCounts.ML.approved }} / {{ user.ML_Assign }}
             </span>
             |
-            <span
-              [ngClass]="{
-                'text-red-500': leaveCounts.ML.rejected > 0,
-                'text-black': leaveCounts.ML.rejected === 0
-              }"
-            >
+            <span class="text-red-500">
               Rejected: {{ leaveCounts.ML.rejected }}
             </span>
           </td>
@@ -159,21 +149,11 @@
         <tr>
           <td class="px-3 py-2 border-b text-sm">CL (Casual Leave)</td>
           <td class="px-3 py-2 border-b text-sm">
-            <span
-              [ngClass]="{
-                'text-green-500': leaveCounts.CL.approved > 0,
-                'text-black': leaveCounts.CL.approved === 0
-              }"
-            >
-              Approved: {{ leaveCounts.CL.approved }}
+            <span class="text-green-500">
+              Approved: {{ leaveCounts.CL.approved }} / {{ user.CL_Assign }}
             </span>
             |
-            <span
-              [ngClass]="{
-                'text-red-500': leaveCounts.CL.rejected > 0,
-                'text-black': leaveCounts.CL.rejected === 0
-              }"
-            >
+            <span class="text-red-500">
               Rejected: {{ leaveCounts.CL.rejected }}
             </span>
           </td>
@@ -181,21 +161,11 @@
         <tr>
           <td class="px-3 py-2 border-b text-sm">EL (Emergency Leave)</td>
           <td class="px-3 py-2 border-b text-sm">
-            <span
-              [ngClass]="{
-                'text-green-500': leaveCounts.EL.approved > 0,
-                'text-black': leaveCounts.EL.approved === 0
-              }"
-            >
-              Approved: {{ leaveCounts.EL.approved }}
+            <span class="text-green-500">
+              Approved: {{ leaveCounts.EL.approved }} / {{ user.EL_Assign }}
             </span>
             |
-            <span
-              [ngClass]="{
-                'text-red-500': leaveCounts.EL.rejected > 0,
-                'text-black': leaveCounts.EL.rejected === 0
-              }"
-            >
+            <span class="text-red-500">
               Rejected: {{ leaveCounts.EL.rejected }}
             </span>
           </td>
@@ -205,6 +175,16 @@
   </div>
 
   <div class="mt-6">
+    <!-- <div class="flex">
+      <div class="flex">
+        <div class="w-4 h-4 bg-blue-500"></div>
+        <p>Approved</p>
+      </div>
+      <div class="flex">
+        <div class="w-4 h-4 bg-red-500"></div>
+        <p>Reject</p>
+      </div>
+    </div> -->
     <full-calendar [options]="calendarOptions"></full-calendar>
   </div>
   <!-- Holiday Details Modal -->

@@ -42,7 +42,7 @@
           "username": "Alice Johnson",
           "type": "CL",
           "from": "2024-01-10",
-          "to": "2024-01-12",
+          "to": "2024-01-10",
           "status": "Approved",
           "reason": "Family event"
         },
@@ -74,7 +74,7 @@
           "username": "Alice Johnson",
           "type": "ML",
           "from": "2024-04-15",
-          "to": "2024-04-16",
+          "to": "2024-04-15",
           "status": "Approved",
           "reason": "Medical check-up"
         },
@@ -82,7 +82,7 @@
           "username": "Alice Johnson",
           "type": "ML",
           "from": "2024-06-10",
-          "to": "2024-06-12",
+          "to": "2024-06-10",
           "status": "Approved",
           "reason": "Illness"
         },
@@ -90,15 +90,15 @@
           "username": "Alice Johnson",
           "type": "ML",
           "from": "2024-08-05",
-          "to": "2024-08-07",
+          "to": "2024-08-05",
           "status": "Approved",
           "reason": "Medical procedure"
         },
         {
           "username": "Alice Johnson",
           "type": "ML",
-          "from": "2024-09-15",
-          "to": "2024-09-17",
+          "from": "2024-09-16",
+          "to": "2024-09-16",
           "status": "Rejected",
           "reason": "Previous leave overlap"
         },
@@ -114,7 +114,7 @@
           "username": "Alice Johnson",
           "type": "EL",
           "from": "2024-05-20",
-          "to": "2024-05-22",
+          "to": "2024-05-20",
           "status": "Approved",
           "reason": "Family trip"
         },
@@ -122,15 +122,15 @@
           "username": "Alice Johnson",
           "type": "EL",
           "from": "2024-07-25",
-          "to": "2024-07-28",
+          "to": "2024-07-25",
           "status": "Approved",
           "reason": "Holiday"
         },
         {
           "username": "Alice Johnson",
           "type": "EL",
-          "from": "2024-08-15",
-          "to": "2024-08-17",
+          "from": "2024-08-16",
+          "to": "2024-08-16",
           "status": "Approved",
           "reason": "Festival celebration"
         },
@@ -138,14 +138,14 @@
           "username": "Alice Johnson",
           "type": "EL",
           "from": "2024-10-01",
-          "to": "2024-10-04",
+          "to": "2024-10-01",
           "status": "Approved",
           "reason": "Personal retreat"
         },
         {
           "username": "Alice Johnson",
           "type": "EL",
-          "from": "2024-11-01",
+          "from": "2024-11-02",
           "to": "2024-11-03",
           "status": "Approved",
           "reason": "Annual getaway"
@@ -171,6 +171,20 @@
     {
       "id": 2,
       "name": "Bob Smith",
+      "personalDetails": {
+        "employeeId": "E54321",
+        "phoneNumber": "+1 (555) 654-3210",
+        "email": "jones@example.com",
+        "department": "IT",
+        "position": "Software Engineer",
+        "dob": "1992-07-19",
+        "address": "2468 Birch Blvd",
+        "emergencyContact": "+1 (555) 876-5432",
+        "joinDate": "2020-01-10",
+        "leaveStatus": "On Leave",
+        "leaveRequestedDate": "2024-10-02"
+      },
+
       "yearlyTotalLeaves": 24,
       "CL_Assign": 4,
       "ML_Assign": 8,
@@ -178,6 +192,9 @@
       "CL_Taken": 1,
       "ML_Taken": 0,
       "EL_Taken": 2,
+      "CL_Rejected": 1,
+      "ML_Rejected": 1,
+      "EL_Rejected": 2,
       "leaveStatus": "Pending",
       "leaveRequestedDate": "2024-10-30",
       "leaveApplications": [
@@ -188,11 +205,83 @@
           "to": "2024-11-10",
           "status": "Pending"
         }
+      ],
+      "leaveHistory": [
+        {
+          "username": "Bob Smith",
+          "type": "CL",
+          "from": "2024-07-18",
+          "to": "2024-07-18",
+          "status": "Approved",
+          "reason": "School event"
+        },
+        {
+          "username": "Bob Smith",
+          "type": "CL",
+          "from": "2024-09-02",
+          "to": "2024-09-03",
+          "status": "Rejected",
+          "reason": "Insufficient CL balance"
+        },
+        {
+          "username": "Bob Smith",
+          "type": "ML",
+          "from": "2024-09-15",
+          "to": "2024-09-17",
+          "status": "Rejected",
+          "reason": "Previous leave overlap"
+        },
+        {
+          "username": "Bob Smith",
+          "type": "EL",
+          "from": "2024-10-01",
+          "to": "2024-10-01",
+          "status": "Approved",
+          "reason": "Personal retreat"
+        },
+        {
+          "username": "Bob Smith",
+          "type": "EL",
+          "from": "2024-11-02",
+          "to": "2024-11-02",
+          "status": "Approved",
+          "reason": "Annual getaway"
+        },
+        {
+          "username": "Bob Smith",
+          "type": "EL",
+          "from": "2024-10-15",
+          "to": "2024-10-18",
+          "status": "Rejected",
+          "reason": "Insufficient EL balance"
+        },
+        {
+          "username": "Bob Smith",
+          "type": "EL",
+          "from": "2024-11-20",
+          "to": "2024-11-23",
+          "status": "Rejected",
+          "reason": "Leave limit reached"
+        }
       ]
     },
     {
       "id": 3,
       "name": "Catherine Lee",
+      "personalDetails": {
+        "employeeId": "E98765",
+        "phoneNumber": "+1 (555) 987-6543",
+        "email": "green@example.com",
+        "department": "Sales",
+        "position": "Sales Manager",
+        "dob": "1983-05-30",
+        "address": "3210 Pine Ave",
+        "emergencyContact": "+1 (555) 543-2109",
+        "joinDate": "2012-07-25",
+        "leaveStatus": "On Leave",
+        "leaveRequestedDate": "2024-11-15"
+      },
+
       "yearlyTotalLeaves": 20,
       "CL_Assign": 5,
       "ML_Assign": 5,
@@ -215,6 +304,20 @@
     {
       "id": 4,
       "name": "David Brown",
+      "personalDetails": {
+        "employeeId": "E24680",
+        "phoneNumber": "+1 (555) 456-7890",
+        "email": "sarah.white@example.com",
+        "department": "Operations",
+        "position": "Operations Manager",
+        "dob": "1987-03-18",
+        "address": "1357 Cedar Lane",
+        "emergencyContact": "+1 (555) 678-4321",
+        "joinDate": "2017-04-05",
+        "leaveStatus": "On Leave",
+        "leaveRequestedDate": "2024-08-15"
+      },
+
       "yearlyTotalLeaves": 30,
       "CL_Assign": 10,
       "ML_Assign": 10,
@@ -311,7 +414,7 @@
       "ML_Taken": 0,
       "EL_Taken": 0,
       "leaveStatus": "Pending",
-      "leaveRequestedDate": "2024-11-17",
+      "leaveRequestedDate": "2024-11-12",
       "leaveApplications": [
         {
           "username": "Henry Ford",

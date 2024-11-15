@@ -51,11 +51,19 @@ export class AllUsersComponent {
 
   currentDateTime: string = '';
 
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
+  totalItems: number = 0;
+  totalPages: number = 0;
+
   ngOnInit(): void {
     this.updateDateTime();
     setInterval(() => {
       this.updateDateTime();
     }, 60000);
+
+    this.totalItems = this.filteredUsers.length;
+    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
   updateDateTime(): void {
@@ -72,11 +80,70 @@ export class AllUsersComponent {
   }
 
   get filteredUsers() {
-    return this.users
+    const filtered = this.users
       .filter((user) =>
         user.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
       .sort((a, b) => this.sortUsers(a, b));
+
+    this.totalItems = filtered.length;
+    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+
+    return filtered;
+  }
+
+  // Get paginated users based on current page
+  get paginatedUsers() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.filteredUsers.slice(startIndex, endIndex);
+  }
+
+  // Sort users based on column and direction
+  sortData(column: keyof User) {
+    if (this.sortColumn === column) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = column;
+      this.sortAscending = true;
+    }
+  }
+
+  // Sorting logic
+  sortUsers(a: User, b: User) {
+    const valueA = a[this.sortColumn];
+    const valueB = b[this.sortColumn];
+
+    if (typeof valueA === 'string' && typeof valueB === 'string') {
+      return this.sortAscending
+        ? valueA.localeCompare(valueB)
+        : valueB.localeCompare(valueA);
+    }
+
+    if (typeof valueA === 'number' && typeof valueB === 'number') {
+      return this.sortAscending ? valueA - valueB : valueB - valueA;
+    }
+
+    return 0;
+  }
+
+  // Pagination methods
+  setPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
   }
 
   openEditModal(user: User) {
@@ -147,34 +214,6 @@ export class AllUsersComponent {
       body: rows,
     });
     doc.save('users.pdf');
-  }
-
-  // Sorting Function
-  sortData(column: keyof User) {
-    if (this.sortColumn === column) {
-      this.sortAscending = !this.sortAscending;
-    } else {
-      this.sortColumn = column;
-      this.sortAscending = true;
-    }
-  }
-
-  sortUsers(a: User, b: User) {
-    const valueA = a[this.sortColumn];
-    const valueB = b[this.sortColumn];
-
-    // Handle string comparison
-    if (typeof valueA === 'string' && typeof valueB === 'string') {
-      return this.sortAscending
-        ? valueA.localeCompare(valueB)
-        : valueB.localeCompare(valueA);
-    }
-
-    if (typeof valueA === 'number' && typeof valueB === 'number') {
-      return this.sortAscending ? valueA - valueB : valueB - valueA;
-    }
-
-    return 0;
   }
 
   totalTakenLeave(user: User): number {
